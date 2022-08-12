@@ -32,7 +32,7 @@ Route::post('/login', function (Request $request) {
         'password' => 'required|string',
     ]);
     if (!Auth::attempt($login)) {
-        return response(['message' => 'Invalid credential']);
+        return response(['message' => 'Invalid credential'], 401);
     }
 
     $user = Auth::user();
@@ -44,11 +44,13 @@ Route::post('/login', function (Request $request) {
 Route::post('/register', function (RegisterUserRequest $request) {
     $request->validated();
 
-    return User::create([
+    $user = User::create([
         'name' => request('name'),
         'email' => request('email'),
         'password' => Hash::make(request('password')),
     ]);
+
+    return response($user, 201);
 });
 
 Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
@@ -56,11 +58,13 @@ Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
     Route::post('/create', function (StoreUserRequest $request) {
         $request->validated();
 
-        return User::create([
+        $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => Hash::make('abcd1234'),
         ]);
+
+        return response($user, 201);
     });
 
     //Read
@@ -87,7 +91,7 @@ Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
                 ->paginate(3);
         }
 
-        return new UserCollection($user);
+        return response(new UserCollection($user), 200);
     });
 
     //Update
@@ -180,6 +184,6 @@ Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
             unlink($file_path);
         }
 
-        return response('OK', '200');
+        return response('File import!', '200');
     });
 });
