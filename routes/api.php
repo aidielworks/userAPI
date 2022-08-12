@@ -91,7 +91,7 @@ Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
                 ->paginate(3);
         }
 
-        return response(new UserCollection($user), 200);
+        return new UserCollection($user);
     });
 
     //Update
