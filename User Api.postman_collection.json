@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "89e5c294-503a-44f3-ae0f-a8bcc85aa2d0",
+		"name": "User Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "aidiel@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "abcd1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}login",
+							"host": [
+								"{{url}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}users/create",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}users/",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}users/1?_method=PATCH",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}users/delete",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import Spreadsheet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "spreadsheet",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "import_type",
+									"value": "",
+									"description": "create, update, 'delete'",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}users/import",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"import"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOTUwZjI4NjdiNmU0ZGY3YjAyMjM0YWMyZWI5OWViMzAyZmNkZjhkYmU4NjUxNDE3ZGQ0MWFlNTMxZmM3ZDhkOWJlZDBjNjgyMGIyNzdkN2UiLCJpYXQiOjE2NjAzMDA0NjcuMzgwOTE3LCJuYmYiOjE2NjAzMDA0NjcuMzgwOTIsImV4cCI6MTY5MTgzNjQ2Ny4zNzQzMTMsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.M00pvF9gYQOKxzs2dgfyO40vlMz8OirnKA2s1ODJL5Azghg4RjxglNu7kN1EhFxSh_OCbSjbxBni67toZpfxgVDcAJ0YAAy8C53nKZ02G6PDiXmoiOrWDI0GyG3kv-i2HlF05t8Zaqne4_XhDCSH4k2bhVkyjADWUMjA3Ep6Cof63a2c7_DlllWjatr6Ttf7glsn0r1kDFS_AiFMnKwAW4X06_dkA2yg-1T-_LaUr3AuUnlBC50wJDZfsMxDUxH86ZXn3QphnwCeIUD9LPFmelARBxSnLoarxZIqmkAhMFJ_gqANkIvj5B4QWeCg8-Prg8jgRYk5Mij-mewCgu9yJUBNAFt1zfUvRaSXMkUFY13kOKKRdIunj9vme-ELYT78Yo24T5ZD4DKQ2XXyZlgxe_sFYebI7zWmjntiRC0q5dhzFrR5nwfSUPaRYzI7qrQc8WUF9HpVgzMqwcakOT-jmIEckrd64wFGuw1dTklfuFTj3JfNHzxiBIFtn2kO7QeEcIwYzIzeZO3_kEnbZsBVaHc2cgZhvio-I_PiAsHIMipZ4Lyx_DPx-8IXpV4ibu6O6s_6XkfOR3VcD6mdujEpmcDdAsMovoH39sIPtvVSE4dJC1wDwAGllgT9K2FWbpuQD_RTMYJpF0mKFhZbsXEDdp5qA7_AAtBFDa8qK535KQI",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "aidiel",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "aidiel@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "abcd1234",
+							"type": "text"
+						},
+						{
+							"key": "retype_password",
+							"value": "abcd1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}register",
+					"host": [
+						"{{url}}register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
