@@ -5,7 +5,6 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,8 +35,9 @@ Route::post('/login', function (Request $request) {
         return response(['message' => 'Invalid credential']);
     }
 
-    $access_token = Auth::user()->createToken('authToken')->accessToken;
-
+    $user = Auth::user();
+    $access_token = $user->createToken('authToken')->accessToken;
+    
     return response(['user' => Auth::user(), compact('access_token')]);
 });
 
@@ -51,7 +51,7 @@ Route::post('/register', function (RegisterUserRequest $request) {
     ]);
 });
 
-Route::group(['middleware' => 'auth:sanctum','prefix' => 'users'], function () {
+Route::group(['middleware' => 'auth:api','prefix' => 'users'], function () {
     //Create user
     Route::post('/create', function (StoreUserRequest $request) {
         $request->validated();
